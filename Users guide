@@ -1,0 +1,12 @@
+The following explain how to use them in your own code. 
+1. Code#
+- in the zip file there are 4 java files that are classes for each machine learning technique(for example nn_functions.java for MLP).
+- Run the StormSurgeFs.java file to select the machine learning method for the wrapper features selection and the dataset to execute:
+   The first parameter enter 0 if you want to run MLP, 1 for SVM, 2 for kNN, 3 for RF.
+- If you want to change the parameters of GA you can add it in method
+  private static Instances[] GAWrap(Instances trainData, Instances testData) throws Exception
+ in the corresponding classes of machine learning algorithms
+2. Datasets#
+The datasets are not limited to ARFF files. It can also read CSV files and other formats (basically all file formats that Weka can import via its converters;
+it uses the file extension to determine the associated loader). 
+
