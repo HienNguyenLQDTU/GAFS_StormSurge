@@ -41,7 +41,7 @@ public class knn_functions
         return newInst;
         
     }
-    //PSO_Cfs feature selection
+    /*//PSO_Cfs feature selection
     private static Instances[] PSOCfs(Instances trainData, Instances testData) throws Exception
     {
         Instances[] results=new Instances[2];
@@ -57,7 +57,7 @@ public class knn_functions
         results[0] = new Instances(RemoveFS(trainData, list));
         results[1] = new Instances(RemoveFS(testData, list));
         return results;
-    }
+    } */
     //GA_Wrap feature selection
     private static Instances[] GAWrap(Instances trainData, Instances testData) throws Exception
     {
