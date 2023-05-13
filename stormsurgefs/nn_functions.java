@@ -18,7 +18,7 @@ import weka.attributeSelection.AttributeSelection;
 import weka.attributeSelection.CfsSubsetEval;
 import weka.attributeSelection.WrapperSubsetEval;
 import weka.classifiers.functions.MultilayerPerceptron;
-import weka.attributeSelection.PSOSearch;
+//import weka.attributeSelection.PSOSearch;
 import weka.attributeSelection.GeneticSearch;
 import weka.core.Instances;
 /**
@@ -41,7 +41,7 @@ public class nn_functions
         return newInst;
         
     }
-    //PSO_Cfs feature selection
+    /*//PSO_Cfs feature selection
     private static Instances[] PSOCfs(Instances trainData, Instances testData) throws Exception
     {
         Instances[] results=new Instances[2];
@@ -58,7 +58,7 @@ public class nn_functions
         results[1] = new Instances(RemoveFS(testData, list));
         return results;
     }
-   
+   */
 
 
     //GA_Wrap feature selection
