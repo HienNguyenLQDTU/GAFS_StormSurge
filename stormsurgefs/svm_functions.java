@@ -18,7 +18,7 @@ import weka.attributeSelection.AttributeSelection;
 import weka.attributeSelection.CfsSubsetEval;
 import weka.attributeSelection.WrapperSubsetEval;
 import weka.classifiers.functions.SMOreg;
-import weka.attributeSelection.PSOSearch;
+//import weka.attributeSelection.PSOSearch;
 import weka.attributeSelection.GeneticSearch;
 import weka.core.Instances;
 
@@ -42,7 +42,7 @@ public class svm_functions
         return newInst;
         
     }
-    //PSO_Cfs feature selection
+    /*//PSO_Cfs feature selection
     private static Instances[] PSOCfs(Instances trainData, Instances testData) throws Exception
     {
         Instances[] results=new Instances[2];
@@ -58,8 +58,8 @@ public class svm_functions
         results[0] = new Instances(RemoveFS(trainData, list));
         results[1] = new Instances(RemoveFS(testData, list));
         return results;
-    }
-    //PSO_Wrap feature selection
+    } */
+    //GA_Wrap feature selection
     private static Instances[] GAWrap(Instances trainData, Instances testData) throws Exception
     {
         Instances[] results=new Instances[2];
