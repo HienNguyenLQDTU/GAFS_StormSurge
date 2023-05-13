@@ -18,7 +18,7 @@ import weka.attributeSelection.AttributeSelection;
 import weka.attributeSelection.CfsSubsetEval;
 import weka.attributeSelection.WrapperSubsetEval;
 import weka.classifiers.lazy.IBk;
-import weka.attributeSelection.PSOSearch;
+//import weka.attributeSelection.PSOSearch;
 import weka.core.Instances;
 
 /**
@@ -58,8 +58,8 @@ public class knn_functions
         results[1] = new Instances(RemoveFS(testData, list));
         return results;
     }
-    //PSO_Wrap feature selection
-    private static Instances[] PSOWrap(Instances trainData, Instances testData) throws Exception
+    //GA_Wrap feature selection
+    private static Instances[] GAWrap(Instances trainData, Instances testData) throws Exception
     {
         Instances[] results=new Instances[2];
         AttributeSelection attsel = new AttributeSelection(); 
@@ -67,10 +67,12 @@ public class knn_functions
         IBk knn =new IBk(3);
         eval.setClassifier(knn);
         attsel.setEvaluator(eval);
-        PSOSearch search=new PSOSearch();
-        search.setPopulationSize(50);
-        search.setIterations(100);
-        attsel.setSearch(search);
+        //PSOSearch search=new PSOSearch();
+        //search.setPopulationSize(50);
+        //search.setIterations(100);
+        GeneticSearch gs = new GeneticSearch();
+        gs.setSeed(1000);
+        attsel.setSearch(gs);
         attsel.SelectAttributes(trainData);
         int[] list=attsel.selectedAttributes();
         results[0] = new Instances(RemoveFS(trainData, list));
@@ -93,27 +95,27 @@ public class knn_functions
         //accuracy
         double ccAll;
         double ccPSOCfs;
-        double ccPSOWrap;
+        double ccGAWrap;
         double nrmseAll;
         double nrmsePSOCfs;
-        double nrmsePSOWrap;
+        double nrmseGAWrap;
         double[] results = new double[2];
         //all features
         results = Reg.KnnReg(trainData, testData, "all_"+fileTrainName[data_idx]);
         ccAll = results[0];
         nrmseAll = results[1];
         //PSOCfs
-        Instances[] psoCfsInst =new Instances[2];
-        psoCfsInst = PSOCfs(trainData, testData);
-        results = Reg.KnnReg(psoCfsInst[0], psoCfsInst[1], "psoCfs_"+fileTrainName[data_idx]);
-        ccPSOCfs = results[0];
-        nrmsePSOCfs = results[1];
-        //PSOWrap
+        //Instances[] psoCfsInst =new Instances[2];
+        //psoCfsInst = PSOCfs(trainData, testData);
+        //results = Reg.KnnReg(psoCfsInst[0], psoCfsInst[1], "psoCfs_"+fileTrainName[data_idx]);
+        //ccPSOCfs = results[0];
+        //nrmsePSOCfs = results[1];
+        //GAWrap
         Instances[] psoWrapInst =new Instances[2];
-        psoWrapInst = PSOWrap(trainData, testData);
-        results = Reg.KnnReg(psoWrapInst[0], psoWrapInst[1], "psoWrap_"+fileTrainName[data_idx]);
-        ccPSOWrap = results[0];
-        nrmsePSOWrap = results[1];
+        gaWrapInst = GAWrap(trainData, testData);
+        results = Reg.KnnReg(gaWrapInst[0], gaWrapInst[1], "gaWrap_"+fileTrainName[data_idx]);
+        ccGAWrap = results[0];
+        nrmseGAWrap = results[1];
         //Write results to a file
         File file=new File("knn_cc_nrmse_"+fileTrainName[data_idx]+".txt");
         FileWriter fileWriter=new FileWriter(file.getAbsoluteFile());
